@@ -10,7 +10,7 @@ To index the offered datasets into your running Elasticsearch cluster, please fo
 | Ingest Strategy | `_bulk` API |
 
 HOW-TO:
-1. Download shakespeare_dataset.json, which will be the body of our `_bulk` request
+1. Download [shakespeare_dataset.json](shakespeare_dataset.json), which will be the body of our `_bulk` request
 2. Start ElasticSearch at, e.g., http://elasticsearch:9200
 3. Fire the `_bulk` request. Using curl, it'll look something like:
 
@@ -28,8 +28,8 @@ curl -XPOST "elasticsearch:9200/shakespeare/_doc/_bulk?pretty" \
 
 HOW-TO:
 1. Download Logstash, a data-processing pipeline tool, part of the Elastic Stack
-2. Download the title.basics.tsv.gz archive from https://datasets.imdbws.com
-3. Extract the archive in, e.g., path/to/title.basics.tsv
+2. Download the title.basics.tsv.gz archive from https://datasets.imdbws.com (or [from here](title.basics.tsv.gz))
+3. Extract the archive in, e.g., `path/to/title.basics.tsv`
 4. Start ElasticSearch at, e.g., http://elasticsearch:9200
 5. Create a configuration file that tells Logstash how to parse the .tsv dataset and how to transform its records into Elasticsearch documents to index. For example, consider the `imdb_titles-logstash.conf` configuration file below:
 
