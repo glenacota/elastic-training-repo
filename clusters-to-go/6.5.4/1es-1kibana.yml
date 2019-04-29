@@ -1,8 +1,8 @@
-# 1 Elasticsearch node, 1 Kibana instance - (v6.6.1)
+# 1 Elasticsearch node, 1 Kibana instance - (v6.5.4)
 version: '3'
 services:
   esnode:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     container_name: esnode
     environment:
       - node.name=esnode
@@ -21,7 +21,7 @@ services:
     networks:
       - elastic-net
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.6.1
+    image: docker.elastic.co/kibana/kibana:6.5.4
     container_name: kibana
     environment:
       - elasticsearch.url=http://elasticsearch:9200

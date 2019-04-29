@@ -1,8 +1,8 @@
-## 1 ES dedicated master node, 1 ES data node, 1 Kibana instance - (v6.6.1)
+## 1 ES dedicated master node, 1 ES data node, 1 Kibana instance - (v6.5.4)
 version: '3'
 services:
   master:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     container_name: master
     environment:
       - cluster.name=elastic-cluster
@@ -24,7 +24,7 @@ services:
     networks:
       - elastic-net
   datanode:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     container_name: datanode
     environment:
       - cluster.name=elastic-cluster
@@ -43,7 +43,7 @@ services:
     networks:
       - elastic-net
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.6.1
+    image: docker.elastic.co/kibana/kibana:6.5.4
     container_name: kibana
     environment:
       - elasticsearch.url=http://elasticsearch:9200

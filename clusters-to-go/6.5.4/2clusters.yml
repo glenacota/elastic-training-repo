@@ -1,9 +1,9 @@
-# 2 clusters - (v6.6.1)
+# 2 clusters - (v6.5.4)
 # The first cluster has 1 ES node and a Kibana instance, whilst the second cluster has only one ES node
 version: '3'
 services:
   esnode-earth:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     container_name: esnode-earth
     environment:
       - cluster.name=elastic-cluster-earth
@@ -21,7 +21,7 @@ services:
     networks:
       - elastic-net
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.6.1
+    image: docker.elastic.co/kibana/kibana:6.5.4
     container_name: kibana
     environment:
       - elasticsearch.url=http://elasticsearch:9300
@@ -37,7 +37,7 @@ services:
       - esnode-earth:elasticsearch
 
   esnode-mars:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     container_name: esnode-mars
     environment:
       - cluster.name=elastic-cluster-mars
