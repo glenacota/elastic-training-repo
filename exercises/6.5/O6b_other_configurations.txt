@@ -1,0 +1,42 @@
+# ** EXAM OBJECTIVE: CLUSTER ADMINISTRATION **
+# GOAL: Backup and cross-cluster search
+# REQUIRED SETUP: /
+
+# Download the exam version of Elasticsearch
+# Deploy the cluster `eoc-06-earth-cluster`, with one node named `node-earth`
+# Connect a Kibana instance to `node-earth`
+# Start the cluster
+# Create the index `hamlet` and add some documents by running the following _bulk command
+PUT hamlet/_doc/_bulk
+{"index":{"_index":"hamlet","_id":0}}
+{"line_number":"1","speaker":"BERNARDO","text_entry":"Whos there?"}
+{"index":{"_index":"hamlet","_id":1}}
+{"line_number":"2","speaker":"FRANCISCO","text_entry":"Nay, answer me: stand, and unfold yourself."}
+{"index":{"_index":"hamlet","_id":2}}
+{"line_number":"3","speaker":"BERNARDO","text_entry":"Long live the king!"}
+{"index":{"_index":"hamlet","_id":3}}
+{"line_number":"4","speaker":"FRANCISCO","text_entry":"Bernardo?"}
+{"index":{"_index":"hamlet","_id":4}}
+{"line_number":"5","speaker":"BERNARDO","text_entry":"He."}
+# Configure `node-earth` to support a shared file system repository for backups, which is located in (i) "[user_home_folder]/repo" and (ii) "[user_home_folder]/elastic/repo" - e.g., "glenacota/elastic/repo"
+# Create the `hamlet_backup` shared file system repository, with location "[user_home_folder]/elastic/repo"
+# Create a snapshot of the `hamlet` index, so that the snapshot (i) is named `hamlet_snapshot_1`, (ii) is stored into `hamlet_backup`
+# Delete the index `hamlet`
+# Restore the index `hamlet` using `hamlet_snapshot_1`
+# Deploy a second cluster `eoc-06-mars-cluster`, with one node named `node-mars`
+# Connect a Kibana instance to `node-mars`
+# Start the cluster
+# Create the index `hamlet` on `node-mars` and add some documents by running the following _bulk command
+PUT hamlet/_doc/_bulk
+{"index":{"_index":"hamlet","_id":5}}
+{"line_number":"6","speaker":"FRANCISCO","text_entry":"You come most carefully upon your hour."}
+{"index":{"_index":"hamlet","_id":6}}
+{"line_number":"7","speaker":"BERNARDO","text_entry":"Tis now struck twelve; get thee to bed, Francisco."}
+{"index":{"_index":"hamlet","_id":7}}
+{"line_number":"8","speaker":"FRANCISCO","text_entry":"For this relief much thanks: tis bitter cold,"}
+{"index":{"_index":"hamlet","_id":8}}
+{"line_number":"9","speaker":"FRANCISCO","text_entry":"And I am sick at heart."}
+{"index":{"_index":"hamlet","_id":9}}
+{"line_number":"10","speaker":"BERNARDO","text_entry":"Have you had quiet guard?"}
+# Enable cross-cluster search on `eoc-06-mars-cluster`, so that (i) the name of the cross cluster is `earth`, (ii) the seed for the cross cluster is `node-earth`, which is listening on the default transport port, (iii) the cross-cluster configuration persists across multiple restart
+# Write a cross-cluster query for the index `hamlet` on both the local and the `earth` cluster

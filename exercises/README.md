@@ -1,0 +1,2 @@
+# Exercises for the Elastic Certified Engineer exam
+A collection of exercises to test your preparation for the [six objectives of the certification exam](https://training.elastic.co/exam/elastic-certified-engineer#objectives). The name of the folders indicates the version of Elasticsearch requested in the exercises. Please refer to the [Elastic certification FAQs](https://training.elastic.co/certification/faq) to check the latest exam version.
