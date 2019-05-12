@@ -1,0 +1,39 @@
+# ** EXAM OBJECTIVE: INSTALLATION AND CONFIGURATION **
+# GOAL: Secure a cluster and an index using Elasticsearch Security
+# REQUIRED SETUP: (i) a running Elasticsearch cluster with at least one node and a Kibana instance, (ii) no index named `hamlet`
+# You can copy-paste the following instructions into your Kibana console and work directly from there
+
+# Enable xPack security on the cluster
+# Set the password of the `elastic` and `kibana` built-in users, by using the pattern "{{username}}-password" (e.g., "elastic-password")
+# Login to Kibana using the `elastic` user credentials
+# Create the index `hamlet` and add some documents by running the following _bulk command
+PUT hamlet/_doc/_bulk
+{"index":{"_index":"hamlet","_id":0}}
+{"line_number":"1","speaker":"BERNARDO","text_entry":"Whos there?"}
+{"index":{"_index":"hamlet","_id":1}}
+{"line_number":"2","speaker":"FRANCISCO","text_entry":"Nay, answer me: stand, and unfold yourself."}
+{"index":{"_index":"hamlet","_id":2}}
+{"line_number":"3","speaker":"BERNARDO","text_entry":"Long live the king!"}
+{"index":{"_index":"hamlet","_id":3}}
+{"line_number":"4","speaker":"FRANCISCO","text_entry":"Bernardo?"}
+{"index":{"_index":"hamlet","_id":4}}
+{"line_number":"5","speaker":"BERNARDO","text_entry":"He."}
+{"index":{"_index":"hamlet","_id":5}}
+{"line_number":"6","speaker":"FRANCISCO","text_entry":"You come most carefully upon your hour."}
+{"index":{"_index":"hamlet","_id":6}}
+{"line_number":"7","speaker":"BERNARDO","text_entry":"Tis now struck twelve; get thee to bed, Francisco."}
+{"index":{"_index":"hamlet","_id":7}}
+{"line_number":"8","speaker":"FRANCISCO","text_entry":"For this relief much thanks: tis bitter cold,"}
+{"index":{"_index":"hamlet","_id":8}}
+{"line_number":"9","speaker":"FRANCISCO","text_entry":"And I am sick at heart."}
+{"index":{"_index":"hamlet","_id":9}}
+{"line_number":"10","speaker":"BERNARDO","text_entry":"Have you had quiet guard?"}
+# Create the security role `francisco_role` in the native realm, so that the role (i) has "monitor" privileges on the cluster, (ii) has all privileges on the `hamlet` index
+# Create the security role `bernardo_role` in the native realm, so that the role (i) has "monitor" privileges on the cluster, (ii) has read-only privileges on the `hamlet` index, (iii) can see only those documents having "BERNARDO" as a `speaker`, (iv) can see only the `text_entry` field
+# Create the user `francisco` with password "francisco-password"
+# Assign the role `francisco_role` to the `francisco` user
+# Login using the `francisco` user credentials, and run some queries on `hamlet` to verify that the role privileges were correctly set
+# Create the user `bernardo` with password "bernardo-password"
+# Assign the role `bernardo_role` to the `bernardo` user
+# Login using the `bernardo` user credentials, and run some queries on `hamlet` to verify that the role privileges were correctly set
+# Change the password of the `bernardo` user to "poor-bernardo"
