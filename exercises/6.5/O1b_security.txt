@@ -29,10 +29,10 @@ PUT hamlet/_doc/_bulk
 {"index":{"_index":"hamlet","_id":9}}
 {"line_number":"10","speaker":"BERNARDO","text_entry":"Have you had quiet guard?"}
 # Create the security role `francisco_role` in the native realm, so that the role (i) has "monitor" privileges on the cluster, (ii) has all privileges on the `hamlet` index
-# Create the security role `bernardo_role` in the native realm, so that the role (i) has "monitor" privileges on the cluster, (ii) has read-only privileges on the `hamlet` index, (iii) can see only those documents having "BERNARDO" as a `speaker`, (iv) can see only the `text_entry` field
 # Create the user `francisco` with password "francisco-password"
 # Assign the role `francisco_role` to the `francisco` user
 # Login using the `francisco` user credentials, and run some queries on `hamlet` to verify that the role privileges were correctly set
+# Create the security role `bernardo_role` in the native realm, so that the role (i) has "monitor" privileges on the cluster, (ii) has read-only privileges on the `hamlet` index, (iii) can see only those documents having "BERNARDO" as a `speaker`, (iv) can see only the `text_entry` field
 # Create the user `bernardo` with password "bernardo-password"
 # Assign the role `bernardo_role` to the `bernardo` user
 # Login using the `bernardo` user credentials, and run some queries on `hamlet` to verify that the role privileges were correctly set
