@@ -34,5 +34,13 @@ PUT hamlet-pirate/_doc/_bulk
 {"line_number":"8","speaker":"FRANCISCO","text_entry":"For this relief much thanks, son of a biscuit eater"}
 {"index":{"_index":"hamlet-pirate","_id":8}}
 {"line_number":"9","speaker":"BERNARDO","text_entry":"Arrrrrrrrh!"}
-# Enable cross-cluster search on `eoc-06-adaptation-cluster`, so that (i) the name of the remote cluster is `original`, (ii) the seed for the remote cluster is `node-1`, which is listening on the default transport port, (iii) the cross-cluster configuration persists across multiple restart
-# Write a cross-cluster query for the indices `hamlet` and `hamlet-pirate` on the remote and local clusters, respectively
+# Enable cross-cluster search on `eoc-06-adaptation-cluster`, so that (i) the name of the remote cluster is `original`, (ii) the seed for the remote cluster is `node-1`, which is listening on the default transport port, (iii) the cross-cluster configuration persists across multiple restarts
+# Run the following cross-cluster query to check that your setup is correct
+GET /original:hamlet,hamlet-pirate/_search
+{
+  "query": {
+    "match": {
+      "speaker": "BERNARDO"
+    }
+  }
+}
