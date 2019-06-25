@@ -19,8 +19,14 @@ PUT hamlet-1/_doc/_bulk
 {"index":{"_index":"hamlet-1","_id":3}}
 {"line_number":"1.2.1","speaker":"KING CLAUDIUS","text_entry":"Though yet of Hamlet our dear brothers death"}
 # Verify that the mapping of `hamlet-1` is consistent with what defined in `hamlet_template`
-# Update the mapping of `hamlet_template` so as to (i) remove all fields but `text_entry`, (ii) disable queries but not aggregations for `text_entry`
-# Update `hamlet_template` so as to (i) dynamically map to an integer any field that starts by "number_", (iv) dynamically map to unanalysed text any string field
+# Update `hamlet_template` so as to reject any document having a field that is not defined in the mapping
+# Verify that you cannot index the following document in `hamlet-1`
+PUT hamlet-1/_doc
+{
+  "author": "Shakespeare"
+}
+# Update `hamlet_template` so as to enable dynamic mapping again
+# Update `hamlet_template` so as to (i) dynamically map to an integer any field that starts by "number_", (ii) dynamically map to unanalysed text any string field
 # Create the index `hamlet-2` and add a document by running the following command
 POST hamlet-2/_doc/4
 {
