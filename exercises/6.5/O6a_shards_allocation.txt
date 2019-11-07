@@ -33,7 +33,8 @@ PUT hamlet-2/_doc/_bulk
 {"line_number":"9","speaker":"FRANCISCO","text_entry":"And I am sick at heart."}
 {"index":{"_index":"hamlet-2","_id":9}}
 {"line_number":"10","speaker":"BERNARDO","text_entry":"Have you had quiet guard?"}
-# Check that both indices `hamlet-1` and `hamlet-2` have a green status
+# Check that the replicas of indices `hamlet-1` and `hamlet-2` have been allocated
+# Check the distribution of the primary shards and replicas of indices `hamlet-1` and `hamlet-2` across the nodes of the cluster
 # Configure `hamlet-1` to allocate both primary shards to `node2`, using the node name
 # Verify the success of the last action by using the _cat API
 # Configure `hamlet-2` so that no primary shard is allocated to `node3`
