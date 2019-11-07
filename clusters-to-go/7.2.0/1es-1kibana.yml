@@ -1,0 +1,44 @@
+# 1 Elasticsearch node, 1 Kibana instance - (v7.2.0)
+version: '3'
+services:
+  esnode:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+    container_name: esnode7.2.0
+    environment:
+      - node.name=esnode
+      - cluster.name=elastic-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esnode-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic-net
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.2.0
+    container_name: kibana7.2.0
+    environment:
+      - elasticsearch.url=http://elasticsearch:9200
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 5601:5601
+    networks:
+      - elastic-net
+    links:
+      - esnode:elasticsearch
+
+volumes:
+  esnode-data:
+    driver: local
+
+networks:
+  elastic-net:
