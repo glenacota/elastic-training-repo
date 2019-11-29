@@ -13,5 +13,5 @@
 # Configure `node2` and `node3` to be both an ingest and data node
 # Configure `node1` to disallow swapping on its host
 # Configure the JVM settings of each node so that it uses a minimum and maximum of 8 GB for the heap
-# Configure the logging settings of each node so that (i)  the logs directory is not the default one, (ii) the log level for transport-related events is set to "debug"
+# Configure the logging settings of each node so that (i) the logs directory is not the default one, (ii) the log level for transport-related events is set to "debug"
 # Configure the nodes so as to disable the possibility to delete indices using wildcards

@@ -1,0 +1,21 @@
+# ** EXAM OBJECTIVE: QUERIES **
+# GOAL: Create search queries for analyzed text, highlight, pagination, and sort
+# REQUIRED SETUP: (i) a running Elasticsearch cluster with at least one node and a Kibana instance, (ii) add the "Sample web logs" and "Sample eCommerce orders" to Kibana
+# Copy-paste the following instructions into your Kibana Dev Tools, and work directly from there
+
+### Run the next queries on the `kibana_sample_data_logs` index
+# Search for documents with the `message` field containing the string "Firefox"
+# As above, but return up to 50 results
+# As above, but return up to 50 results with an offset of 50 from the first
+# Search for documents with the `message` field containing the strings "Firefox" or "Kibana"
+# Search for documents with the `message` field containing both the strings "Firefox" and "Kibana"
+# Search for documents with the `message` field containing at least two of the following strings: "Firefox", "Kibana", "159.64.35.129"
+# As above, but also return the highlights for the `message` field
+# As above, but also wrap the highlights in "{{" and "}}"
+# Search for documents with the `message` field containing the phrase "HTTP/1.1 200 51"
+# As above, but sort the results by the `machine.os` field, in descending order
+# As above, but also sort the results by the `timestamp` field, in ascending order
+
+### Run the next queries on the `kibana_sample_data_ecommerce` index
+# Search for documents with the `day_of_week` field containing the string "Monday"
+# As above, but sort the results by the `products.base_price` field in descending order, picking the lowest value of the array
