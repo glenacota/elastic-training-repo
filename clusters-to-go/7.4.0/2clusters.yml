@@ -1,0 +1,66 @@
+# 2 clusters - (v7.4.0)
+# The first cluster has 1 ES node and a Kibana instance, whilst the second cluster has only one ES node
+version: '3'
+services:
+  esnode-earth:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    container_name: esnode-earth7.4.0
+    environment:
+      - cluster.name=elastic-cluster-earth
+      - node.name=esnode-earth
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esnode-earth-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic-net
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.4.0
+    container_name: kibana7.4.0
+    environment:
+      - elasticsearch.url=http://elasticsearch:9300
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 5601:5601
+    networks:
+      - elastic-net
+    links:
+      - esnode-earth:elasticsearch
+
+  esnode-mars:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    container_name: esnode-mars
+    environment:
+      - cluster.name=elastic-cluster-mars
+      - node.name=esnode-mars
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esnode-mars-data:/usr/share/elasticsearch/data
+    ports:
+      - 9201:9200
+      - 9301:9300
+    networks:
+      - elastic-net
+
+volumes:
+  esnode-earth-data:
+    driver: local
+  esnode-mars-data:
+    driver: local
+
+networks:
+  elastic-net:

@@ -1,0 +1,95 @@
+# 1 ES dedicated master node, 2 ES data nodes, 1 Kibana instance - (v7.4.0)
+# The two data nodes support allocation awareness based on attribute's values
+version: '3'
+services:
+  master:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    container_name: master7.4.0
+    environment:
+      - cluster.name=elastic-cluster
+      - cluster.initial_master_nodes=master
+      - node.name=master
+      - node.master=true
+      - node.data=false
+      - node.ingest=false
+      - bootstrap.memory_lock=true
+      - xpack.license.self_generated.type=basic
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - master-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic-net
+  datanode-europe:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    container_name: datanode-europe7.4.0
+    environment:
+      - cluster.name=elastic-cluster
+      - cluster.initial_master_nodes=master
+      - node.name=datanode-europe
+      - node.master=false
+      - node.data=true
+      - node.attr.my_zone=europe
+      - bootstrap.memory_lock=true
+      - xpack.license.self_generated.type=basic
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - datanode-europe-data:/usr/share/elasticsearch/data
+    networks:
+      - elastic-net
+  datanode-asia:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    container_name: datanode-asia7.4.0
+    environment:
+      - cluster.name=elastic-cluster
+      - cluster.initial_master_nodes=master
+      - node.name=datanode-asia
+      - node.master=false
+      - node.data=true
+      - node.attr.my_zone=asia
+      - bootstrap.memory_lock=true
+      - xpack.license.self_generated.type=basic
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - datanode-asia-data:/usr/share/elasticsearch/data
+    networks:
+      - elastic-net
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.4.0
+    container_name: kibana7.4.0
+    environment:
+      - elasticsearch.url=http://elasticsearch:9200
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 5601:5601
+    networks:
+      - elastic-net
+    links:
+      - datanode-europe:elasticsearch
+
+volumes:
+  master-data:
+    driver: local
+  datanode-europe-data:
+    driver: local
+  datanode-asia-data:
+    driver: local
+
+networks:
+  elastic-net:
