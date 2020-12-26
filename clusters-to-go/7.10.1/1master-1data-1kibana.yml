@@ -1,0 +1,69 @@
+## 1 ES dedicated master node, 1 ES data node, 1 Kibana instance - (v7.10.1)
+version: '3'
+services:
+  master:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    container_name: master
+    environment:
+      - cluster.name=elastic-cluster
+      - cluster.initial_master_nodes=master
+      - node.name=master
+      - node.master=true
+      - node.data=false
+      - node.ingest=false
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - master-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - elastic-net
+  datanode:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    container_name: datanode7.10.1
+    environment:
+      - cluster.name=elastic-cluster
+      - cluster.initial_master_nodes=master
+      - node.name=datanode
+      - node.master=false
+      - node.data=true
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - datanode-data:/usr/share/elasticsearch/data
+    networks:
+      - elastic-net
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    container_name: kibana7.10.1
+    environment:
+      - elasticsearch.url=http://elasticsearch:9200
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 5601:5601
+    networks:
+      - elastic-net
+    links:
+      - datanode:elasticsearch
+
+volumes:
+  master-data:
+    driver: local
+  datanode-data:
+    driver: local
+
+networks:
+  elastic-net:
