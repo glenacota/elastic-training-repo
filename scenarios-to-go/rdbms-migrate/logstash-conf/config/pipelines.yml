@@ -1,0 +1,8 @@
+- pipeline.id: join-orders-customers
+  path.config: /usr/share/logstash/pipelines/join_orders_customers_pipeline.conf
+- pipeline.id: customers
+  path.config: /usr/share/logstash/pipelines/customers_pipeline.conf
+- pipeline.id: orders
+  path.config: /usr/share/logstash/pipelines/orders_pipeline.conf
+- pipeline.id: products
+  path.config: /usr/share/logstash/pipelines/products_pipeline.conf

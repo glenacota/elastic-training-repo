@@ -1,0 +1,64 @@
+# 1 Elasticsearch node, 1 Kibana instance - (v7.10.1)
+version: '3'
+services:
+
+  esnode:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    container_name: rdbms-migrate-esnode
+    environment:
+      - node.name=esnode
+      - cluster.name=elastic-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - path.repo=/usr/share/elasticsearch/backups
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esnode-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - rdbms-migrate-net
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    container_name: rdbms-migrate-kibana
+    environment:
+      - elasticsearch.url=http://elasticsearch:9200
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 5601:5601
+    networks:
+      - rdbms-migrate-net
+    links:
+      - esnode:elasticsearch
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.10.1
+    container_name: rdbms-migrate-logstash
+    ports:
+      - 5044:5044
+    networks:
+      - rdbms-migrate-net
+    volumes:
+      - ./logstash-conf/config:/usr/share/logstash/config
+      - ./logstash-conf/pipelines:/usr/share/logstash/pipelines
+      - ./logstash-conf/templates:/usr/share/logstash/templates
+      - ./logstash-conf/mysql-connector-java-8.0.22.jar:/usr/share/logstash/mysql-connector-java-8.0.22.jar
+    depends_on:
+      - esnode
+    links:
+      - esnode:elasticsearch
+
+volumes:
+  esnode-data:
+    driver: local
+
+networks:
+  rdbms-migrate-net:
