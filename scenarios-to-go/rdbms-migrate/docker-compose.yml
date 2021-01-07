@@ -2,6 +2,22 @@
 version: '3'
 services:
 
+  mysql:
+    image: mysql:8
+    container_name: rdbms-migrate-mysql
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: carsretailing
+      MYSQL_USER: a-user
+      MYSQL_PASSWORD: please-change-me
+    ports:
+      - 3306:3306
+    networks:
+      - rdbms-migrate-net
+    volumes:
+    - ./mysql-conf/mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql
+
   esnode:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     container_name: rdbms-migrate-esnode
@@ -53,6 +69,7 @@ services:
       - ./logstash-conf/mysql-connector-java-8.0.22.jar:/usr/share/logstash/mysql-connector-java-8.0.22.jar
     depends_on:
       - esnode
+      - mysql
     links:
       - esnode:elasticsearch
 
