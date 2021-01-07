@@ -1,18 +1,9 @@
 /*
-BASED ON:
-*********************************************************************
-http://www.mysqltutorial.org
-*********************************************************************
-Name: MySQL Sample Database classicmodels
-Link: http://www.mysqltutorial.org/mysql-sample-database.aspx
-Version 3.1
-+ changed data type from DOUBLE to DECIMAL for amount columns
-Version 3.0
-+ changed DATETIME to DATE for some colunmns
-Version 2.0
-+ changed table type from MyISAM to InnoDB
-+ added foreign keys for all tables
-*********************************************************************
+BASED ON: http://www.mysqltutorial.org
+  *********************************************************************
+  Name: MySQL Sample Database classicmodels
+  Link: http://www.mysqltutorial.org/mysql-sample-database.aspx
+  *********************************************************************
 */
 
 
@@ -46,6 +37,8 @@ CREATE TABLE `customers` (
   `country` varchar(50) NOT NULL,
   `salesRepEmployeeNumber` int(11) DEFAULT NULL,
   `creditLimit` decimal(10,2) DEFAULT NULL,
+  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`customerNumber`),
   KEY `salesRepEmployeeNumber` (`salesRepEmployeeNumber`),
   CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`salesRepEmployeeNumber`) REFERENCES `employees` (`employeeNumber`)
@@ -312,6 +305,8 @@ CREATE TABLE `employees` (
   `officeCode` varchar(10) NOT NULL,
   `reportsTo` int(11) DEFAULT NULL,
   `jobTitle` varchar(50) NOT NULL,
+  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`employeeNumber`),
   KEY `reportsTo` (`reportsTo`),
   KEY `officeCode` (`officeCode`),
@@ -383,6 +378,8 @@ CREATE TABLE `offices` (
   `country` varchar(50) NOT NULL,
   `postalCode` varchar(15) NOT NULL,
   `territory` varchar(10) NOT NULL,
+  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`officeCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -414,6 +411,8 @@ CREATE TABLE `orderdetails` (
   `quantityOrdered` int(11) NOT NULL,
   `priceEach` decimal(10,2) NOT NULL,
   `orderLineNumber` smallint(6) NOT NULL,
+  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`orderNumber`,`productCode`),
   KEY `productCode` (`productCode`),
   CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`orderNumber`) REFERENCES `orders` (`orderNumber`),
@@ -6428,6 +6427,8 @@ CREATE TABLE `orders` (
   `status` varchar(15) NOT NULL,
   `comments` text,
   `customerNumber` int(11) NOT NULL,
+  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`orderNumber`),
   KEY `customerNumber` (`customerNumber`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerNumber`) REFERENCES `customers` (`customerNumber`)
@@ -7098,6 +7099,8 @@ CREATE TABLE `payments` (
   `checkNumber` varchar(50) NOT NULL,
   `paymentDate` date NOT NULL,
   `amount` decimal(10,2) NOT NULL,
+  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`customerNumber`,`checkNumber`),
   CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`customerNumber`) REFERENCES `customers` (`customerNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -7661,6 +7664,8 @@ CREATE TABLE `productlines` (
   `textDescription` varchar(4000) DEFAULT NULL,
   `htmlDescription` mediumtext,
   `image` mediumblob,
+  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`productLine`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -7696,6 +7701,8 @@ CREATE TABLE `products` (
   `quantityInStock` smallint(6) NOT NULL,
   `buyPrice` decimal(10,2) NOT NULL,
   `MSRP` decimal(10,2) NOT NULL,
+  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`productCode`),
   KEY `productLine` (`productLine`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`productLine`) REFERENCES `productlines` (`productLine`)
