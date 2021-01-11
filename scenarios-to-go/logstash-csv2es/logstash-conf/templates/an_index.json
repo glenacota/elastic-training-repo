@@ -1,0 +1,12 @@
+{
+    "index_patterns": [ "an_index*" ],
+    "order": 1,
+    "settings": {
+        "refresh_interval": "10s",
+        "number_of_shards": 1,
+        "number_of_replicas": 1
+    },
+    "mappings": {
+        "properties": {}
+    }
+}
