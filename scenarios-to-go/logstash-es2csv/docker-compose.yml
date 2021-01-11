@@ -1,0 +1,14 @@
+# 1 Logstash server - (v7.10.1)
+version: '3'
+services:
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.10.1
+    container_name: logstash-es2csv
+    ports:
+      - 5044:5044
+    network_mode: host
+    volumes:
+      - ./logstash-conf/config:/usr/share/logstash/config
+      - ./logstash-conf/pipelines:/usr/share/logstash/pipelines
+      - ./logstash-conf/data:/usr/share/logstash/data

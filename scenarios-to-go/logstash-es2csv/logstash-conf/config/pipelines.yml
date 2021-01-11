@@ -1,0 +1,3 @@
+- pipeline.id: es2csv
+  path.config: /usr/share/logstash/pipelines/es2csv_pipeline.conf
+  pipeline.workers: 1
