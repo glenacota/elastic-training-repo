@@ -1,4 +1,4 @@
-# 1 Elasticsearch node, 1 Kibana instance - (v7.10.1)
+# 1 Elasticsearch node, 1 Kibana instance, 1 Logstash server - (v7.10.1)
 version: '3'
 services:
 
