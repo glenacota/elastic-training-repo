@@ -1,0 +1,2 @@
+- pipeline.id: sample-pipeline
+  path.config: /usr/share/logstash/pipelines/sample_pipeline.conf
