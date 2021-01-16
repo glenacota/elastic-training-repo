@@ -1,0 +1,25 @@
+{
+    "index_patterns": [ "products*" ],
+    "order": 1,
+    "settings": {
+        "refresh_interval": "30s",
+        "number_of_shards": 1,
+        "number_of_replicas": 1
+    },
+    "mappings": {
+        "properties": {
+            "quantityinstock": {
+                "type": "long"
+            },
+            "productcode": {
+                "type" : "keyword"
+            },
+            "productline": {
+                "type" : "keyword"
+            },
+            "productscale": {
+                "type" : "keyword"
+            }
+        }
+    }
+}

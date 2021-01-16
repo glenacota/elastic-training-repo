@@ -1,0 +1,31 @@
+{
+    "index_patterns": [ "order*" ],
+    "order": 1,
+    "settings": {
+        "refresh_interval": "30s",
+        "number_of_shards": 1,
+        "number_of_replicas": 1
+    },
+    "mappings": {
+        "properties": {
+            "quantityordered": {
+                "type": "long"
+            },
+            "ordernumber": {
+                "type" : "keyword"
+            },
+            "customernumber": {
+                "type" : "keyword"
+            },
+            "productcode": {
+                "type" : "keyword"
+            },
+            "orderlinenumber": {
+                "type" : "keyword"
+            },
+            "status": {
+                "type" : "keyword"
+            }
+        }
+    }
+}

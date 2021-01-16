@@ -1,0 +1,25 @@
+{
+    "index_patterns": [ "customers*" ],
+    "order": 1,
+    "settings": {
+        "refresh_interval": "30s",
+        "number_of_shards": 1,
+        "number_of_replicas": 1
+    },
+    "mappings": {
+        "properties": {
+            "purchases": {
+                "type": "long"
+            },
+            "phone": {
+                "type" : "keyword"
+            },
+            "customername": {
+                "type" : "keyword"
+            },
+            "country": {
+                "type" : "keyword"
+            }
+        }
+    }
+}
