@@ -6,9 +6,9 @@
 # Create the index `hamlet_1` with one primary shard and no replicas
 # Add some documents to `hamlet_1` by running the following _bulk command
 PUT hamlet_1/_doc/_bulk
-{"index":{"_index":"hamlet_1","_id":"C0"}}
+{"index":{"_index":"hamlet_1","_id":"C0","routing":"abc"}}
 {"name":"HAMLET","relationship":[{"name":"HORATIO","type":"friend"},{"name":"GERTRUDE","type":"mother"}]}
-{"index":{"_index":"hamlet_1","_id":"C1"}}
+{"index":{"_index":"hamlet_1","_id":"C1","routing":"abc"}}
 {"name":"KING CLAUDIUS","relationship":[{"name":"HAMLET","type":"nephew"}]}
 # Verify that the items of the `relationship` array cannot be searched independently - e.g., searching for a friend named Gertrude will return 1 hit
 GET hamlet_1/_search
@@ -44,11 +44,11 @@ GET hamlet_2/_search
 }
 # Add more documents to `hamlet_2` by running the following _bulk command
 PUT hamlet_2/_doc/_bulk
-{"index":{"_index":"hamlet_2","_id":L0}}
+{"index":{"_index":"hamlet_2","_id":"L0","routing":"abc"}}
 {"line_number":"1.4.1","speaker":"HAMLET","text_entry":"The air bites shrewdly; it is very cold."}
-{"index":{"_index":"hamlet_2","_id":L1}}
+{"index":{"_index":"hamlet_2","_id":"L1","routing":"abc"}}
 {"line_number":"1.4.2","speaker":"HORATIO","text_entry":"It is a nipping and an eager air."}
-{"index":{"_index":"hamlet_2","_id":L2}}
+{"index":{"_index":"hamlet_2","_id":"L2","routing":"abc"}}
 {"line_number":"1.4.3","speaker":"HAMLET","text_entry":"What hour now?"}
 # So far, we have indexed two kinds of documents, either related to characters (ids: C0, C1) or to a line of the dialogue (ids: L0, L1, L2). Notice that a character can have many lines. We will model this one-to-many relation in the next step
 # Create the index `hamlet_3` with only one primary shard and no replicas
