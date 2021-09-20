@@ -1,9 +1,8 @@
-# 1 Elasticsearch node, 1 Kibana instance, 1 Logstash server - (v7.10.1)
-version: '3'
+# 1 Elasticsearch node, 1 Kibana instance, 1 Logstash server - (v7.14.1)
+version: "3"
 services:
-
   esnode:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
     container_name: elk-esnode
     environment:
       - node.name=esnode
@@ -24,7 +23,7 @@ services:
       - elk-net
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.10.1
+    image: docker.elastic.co/kibana/kibana:7.14.1
     container_name: elk-kibana
     environment:
       - elasticsearch.url=http://elasticsearch:9200
@@ -40,7 +39,7 @@ services:
       - esnode:elasticsearch
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.10.1
+    image: docker.elastic.co/logstash/logstash:7.14.1
     container_name: elk-logstash
     ports:
       - 5044:5044
