@@ -11,7 +11,7 @@
 # In one request, update all documents in `hamlet-raw` by adding a new field named `speaker` with value "Hamlet"
 # Update the document with id "1" by renaming the field `line` into `text_entry`
 # Create the index `hamlet` and add some documents by running the following _bulk command
-PUT hamlet/_doc/_bulk
+PUT hamlet/_bulk
 {"index":{"_index":"hamlet","_id":0}}
 {"line_number":"1.1.1","speaker":"BERNARDO","text_entry":"Whos there?"}
 {"index":{"_index":"hamlet","_id":1}}
