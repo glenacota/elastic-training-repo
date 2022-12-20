@@ -25,17 +25,6 @@ PUT hamlet-1/_doc
 {
   "author": "Shakespeare"
 }
-# Update `hamlet_template` so as to enable dynamic mapping again
-# Update `hamlet_template` so as to (i) dynamically map to an integer any field that starts by "number_", (ii) dynamically map to unanalysed text any string field
-# Create the index `hamlet-2` and add a document by running the following command
-POST hamlet-2/_doc/4
-{
-  "text_entry": "With turbulent and dangerous lunacy?",
-  "line_number": "3.1.4",
-  "number_act": "3",
-  "speaker": "KING CLAUDIUS"
-}
-# Verify that the mapping of `hamlet-2` is consistent with what defined in `hamlet_template`
 # Delete all indices beginning with `hamlet`
 # Delete all index templates beginning with `hamlet`
 # Create a component template `hamlet-settings-comp`, so that the template allocates one primary shard and no replicas for each matching index
