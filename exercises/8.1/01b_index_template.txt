@@ -7,7 +7,7 @@
 # Create the indices `hamlet2` and `hamlet_test`
 # Verify that only `hamlet_test` applies the settings defined in `hamlet_template`
 # In one request, delete both `hamlet2` and `hamlet_test`
-# Update `hamlet_template` by defining a mapping for the type "_doc", so that (i) the type has three fields, named `speaker`, `line_number`, and `text_entry`, (ii) `speaker` and `line_number` map to a unanalysed string, (iii) `text_entry` uses an "english" analyzer
+# Update `hamlet_template` by defining a mapping, so that (i) the mapping has three fields, named `speaker`, `line_number`, and `text_entry`, (ii) `speaker` and `line_number` map to a unanalyzed string, (iii) `text_entry` uses an "english" analyzer
 # Create the index `hamlet-1` and add some documents by running the following _bulk command
 PUT hamlet-1/_bulk
 {"index":{"_index":"hamlet-1","_id":0}}

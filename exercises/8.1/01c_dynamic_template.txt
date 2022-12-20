@@ -4,7 +4,6 @@
 # You can copy-paste the following instructions into your Kibana console and work directly from there
 
 # Create the index template `hamlet_template`, so that the template (i) matches any index that starts by "hamlet_" or "hamlet-", (ii) allocates one primary shard and no replicas for each matching index
-# Update `hamlet_template` so as to enable dynamic mapping
 # Update `hamlet_template` so as to (i) enable dynamic mapping, (ii) dynamically map to an integer any field that starts by "number_", (iii) dynamically map to unanalysed text any string field
 # Create the index `hamlet-2` and add a document by running the following command
 POST hamlet-2/_doc/4
