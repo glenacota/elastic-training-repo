@@ -1,0 +1,9 @@
+# ** EXAM OBJECTIVE: SEARCHING DATA **
+# GOAL: Write an asynchronous search
+# REQUIRED SETUP:  (i) a running Elasticsearch cluster with at least one node and a Kibana instance, (ii) add the "Sample web logs" and "Sample eCommerce orders" to Kibana
+# You can copy-paste the following instructions into your Kibana console and work directly from there
+
+### Run the next queries on the `kibana_sample_data_logs` index
+# Search asynchronously for documents with `response` of 404, use a timeout of 0 seconds
+# Check the status of the search above
+# Delete the asynchronous search
