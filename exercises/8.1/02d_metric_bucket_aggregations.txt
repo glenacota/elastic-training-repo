@@ -1,0 +1,13 @@
+# ** EXAM OBJECTIVE: METRIC AND BUCKET AGGREGATIONS **
+# GOAL: Write and execute metric and bucket aggregations
+# REQUIRED SETUP: (i) a running Elasticsearch cluster with at least one node and a Kibana instance, (ii) add the "Sample flight data" to Kibana
+# Copy-paste the following instructions into your Kibana Dev Tools, and work directly from there
+
+### Run the next queries on the `kibana_sample_data_flights` index
+# Create an aggregation named "max_distance" that calculates the maximum value of the `DistanceKilometers` field
+# Create an aggregation named "stats_flight_time" that computes stats over the value of the `FlightTimeMin` field
+# Create two aggregations, named "cardinality_origin_cities" and "cardinality_dest_cities", that calculate an (approximate) count of distinct values of the `OriginCityName` and `DestCityName` fields, respectively
+# Create an aggregation named "popular_origin_cities" that calculates the number of flights grouped by the `OriginCityName` field
+# As above, but return only 5 buckets and in descending order
+# Create an aggregation named "avg_price_histogram" that groups the documents based on their `AvgTicketPrice` field by intervals of 250
+# Use the `timestamp` field to create an aggregation named "flights_every_10_days" that groups the number of flights by an interval of 10 days
