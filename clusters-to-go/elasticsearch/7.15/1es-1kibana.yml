@@ -1,4 +1,4 @@
-# 1 Elasticsearch node, 1 Kibana instance - (v7.13.1)
+# 1 Elasticsearch node, 1 Kibana instance - (v7.15.0)
 version: '3'
 services:
   esnode:
