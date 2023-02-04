@@ -1,5 +1,5 @@
 # Datasets-to-go
-A collection of datasets, useful for practicing with ElasticSearch. Each dataset might be ingested into Elasticsearch using a different strategy, e.g., via `_bulk` API, LogStash, FileBeat.
+A collection of datasets, useful for practicing with Elasticsearch. Each dataset might be ingested into Elasticsearch using a different strategy, e.g., via `_bulk` API, LogStash, FileBeat.
 
 To index the offered datasets into your running Elasticsearch cluster, please follow the instructions below.
 
@@ -11,7 +11,7 @@ To index the offered datasets into your running Elasticsearch cluster, please fo
 
 HOW-TO:
 1. Download [shakespeare_dataset.json](shakespeare_dataset.json), which will be the body of our `_bulk` request
-2. Start ElasticSearch at, e.g., http://elasticsearch:9200
+2. Start Elasticsearch at, e.g., http://elasticsearch:9200
 3. Fire the `_bulk` request. Using curl, it'll look something like:
 
 ```zsh
@@ -30,7 +30,7 @@ HOW-TO:
 1. Download Logstash, a data-processing pipeline tool, part of the Elastic Stack
 2. Download the title.basics.tsv.gz archive from https://datasets.imdbws.com (or [from here](title.basics.tsv.gz))
 3. Extract the archive in, e.g., `path/to/title.basics.tsv`
-4. Start ElasticSearch at, e.g., http://elasticsearch:9200
+4. Start Elasticsearch at, e.g., http://elasticsearch:9200
 5. Create a configuration file that tells Logstash how to parse the .tsv dataset and how to transform its records into Elasticsearch documents to index. For example, consider the `imdb_titles-logstash.conf` configuration file below:
 
 ```
@@ -85,4 +85,20 @@ output {
 
 ```bash
 sudo $LOGSTASH_PATH/bin/logstash -f path/to/imdb_titles-logstash.conf
+```
+
+## New York traffic collisions Jan 2020 - Jan 2023
+| index | `nyc_collisions`|
+|:--|:---|
+| Nr.Documents | 304843 |
+| Ingest Strategy | `_bulk` API |
+
+HOW-TO:
+1. Install [elasticdump](https://github.com/elasticsearch-dump/elasticsearch-dump#installing) on your machine
+2. Extract the archive `nyc_collisions.zip`. The archive includes the _bulk request payload (`nyc_collisions_2020-Jan2023-data.csv`) and the script to start the ingestion(`nyc_collisions_2020-Jan2023.sh`)
+3. Start Elasticsearch at, e.g., http://elasticsearch:9200
+4. Fire the `_bulk` request by running the script
+
+```zsh
+sh /path/to/script/nyc_collisions_2020-Jan2023.sh
 ```
