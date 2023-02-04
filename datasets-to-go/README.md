@@ -23,12 +23,12 @@ curl -XPOST "elasticsearch:9200/shakespeare/_doc/_bulk?pretty" \
 ## IMDB Title Dataset
 | index | `imdb_titles`|
 |:--|:---|
-| Nr.Documents | 5604662 (3 Feb 2019) |
+| Nr.Documents | 1319003 (3 Feb 2019) |
 | Ingest Strategy | Logstash |
 
 HOW-TO:
 1. Download Logstash, a data-processing pipeline tool, part of the Elastic Stack
-2. Download the title.basics.tsv.gz archive from https://datasets.imdbws.com (or [from here](title.basics.tsv.gz))
+2. Download the `title.basics.tsv.zip` archive from https://datasets.imdbws.com (or a shorten one [from here](title.basics.tsv.zip), including only movies and shorts)
 3. Extract the archive in, e.g., `path/to/title.basics.tsv`
 4. Start Elasticsearch at, e.g., http://elasticsearch:9200
 5. Create a configuration file that tells Logstash how to parse the .tsv dataset and how to transform its records into Elasticsearch documents to index. For example, consider the `imdb_titles-logstash.conf` configuration file below:
@@ -45,10 +45,9 @@ input {
 
 filter {
     csv {
-        columns => [ "tconst", "type", "primary_title", "original_title", "is_adult",
+        columns => [ "type", "primary_title", "original_title", "is_adult",
                         "year_start", "year_end", "runtime", "genres"]
         separator => "   "
-        remove_field => "tconst"
     }
     if [runtime] == "\N" {
         mutate { remove_field => [ "runtime" ] }
@@ -90,7 +89,7 @@ sudo $LOGSTASH_PATH/bin/logstash -f path/to/imdb_titles-logstash.conf
 ## New York traffic collisions Jan 2020 - Jan 2023
 | index | `nyc_collisions`|
 |:--|:---|
-| Nr.Documents | 301880 |
+| Nr.Documents | 304843 |
 | Ingest Strategy | `_bulk` API |
 
 HOW-TO:
