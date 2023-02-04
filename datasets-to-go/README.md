@@ -90,7 +90,7 @@ sudo $LOGSTASH_PATH/bin/logstash -f path/to/imdb_titles-logstash.conf
 ## New York traffic collisions Jan 2020 - Jan 2023
 | index | `nyc_collisions`|
 |:--|:---|
-| Nr.Documents | 304843 |
+| Nr.Documents | 301880 |
 | Ingest Strategy | `_bulk` API |
 
 HOW-TO:
