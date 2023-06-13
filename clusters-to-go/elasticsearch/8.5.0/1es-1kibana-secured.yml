@@ -5,6 +5,9 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
     volumes:
       - certs:/usr/share/elasticsearch/config/certs
+    depends_on:
+      esnode:
+        condition: service_healthy
     user: "0"
     command: >
       bash -c '
@@ -44,6 +47,8 @@ services:
         until curl -s -X POST --cacert config/certs/ca/ca.crt -u "elastic:${ELASTIC_PASSWORD}" -H "Content-Type: application/json" https://esnode:9200/_security/user/kibana_system/_password -d "{\"password\":\"${KIBANA_PASSWORD}\"}" | grep -q "^{}"; do sleep 10; done;
         echo "All done!";
       '
+    networks:
+      - elastic-net
     healthcheck:
       test: ["CMD-SHELL", "[ -f config/certs/esnode/esnode.crt ]"]
       interval: 1s
@@ -97,6 +102,7 @@ services:
         condition: service_healthy
     container_name: kibana8.5.0-secured
     environment:
+      - ELASTICSEARCH_HOSTS=https://esnode:9200
       - ELASTICSEARCH_USERNAME=kibana_system
       - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
       - ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt
@@ -111,8 +117,6 @@ services:
       - 5601:5601
     networks:
       - elastic-net
-    links:
-      - esnode:elasticsearch
     healthcheck:
       test:
         [
