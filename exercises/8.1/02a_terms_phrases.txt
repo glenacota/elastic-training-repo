@@ -1,0 +1,16 @@
+# ** EXAM OBJECTIVE: SEARCHING DATA **
+# GOAL: Write and execute a search query for terms and/or phrases in one or more fields of an index
+# REQUIRED SETUP: (i) a running Elasticsearch cluster with at least one node and a Kibana instance, (ii) add the "Sample web logs" and "Sample flight data" to Kibana
+# You can copy-paste the following instructions into your Kibana console and work directly from there
+
+### Run the next queries on the `kibana_sample_data_logs` index
+# Filter documents with the `response` field greater or equal to 400 and less than 500
+# Filter documents with the `referer` field that starts by "http://twitter.com/success"
+# Filter documents with the `request` field that starts by "/people"
+# Filter documents with the `memory` field containing any indexed value
+# Filter documents with the `timestamp` field containing a date between today and one week ago
+# Filter documents with the `clientip` field having an IP address in the range "1.0.0.0"-"1.255.255.255"
+
+### Run the next queries on the `kibana_sample_data_flights` index
+# Filter documents with either the `OriginCityName` or the `DestCityName` fields matching the string "Sydney"
+# As above, but allow inexact fuzzy matching, with a maximum allowed "Levenshtein Edit Distance" set to 2. Test that the query strings "Sydney", "Sidney" and "Sidnei" always return the same number of results

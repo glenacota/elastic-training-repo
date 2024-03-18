@@ -1,0 +1,12 @@
+# ** EXAM OBJECTIVE: SEARCHING DATA **
+# GOAL: Write and execute a search query that is a Boolean combination of multiple queries and filters
+# REQUIRED SETUP: (i) a running Elasticsearch cluster with at least one node and a Kibana instance, (ii) add the "Sample web logs" to Kibana
+# You can copy-paste the following instructions into your Kibana console and work directly from there
+
+### Run the next queries on the `kibana_sample_data_logs` index
+# Filter documents with the `response` field greater or equal to 400 and less than 500 and a second filter for documents with the `referer` field matching the string "http://twitter.com/success/guion-bluford"
+# Filter documents with the `memory` field not containing any indexed value
+# Search for documents with the `agent` field containing the string "Windows" and the `url` field containing the string "name:john"
+# As above, but also filter documents with the `phpmemory` field containing any indexed value
+# Search for documents that have either the `response` field greater or equal to 400 or the `tags` field having the string "error"
+# Search for documents with the `tags` field that does not contain any of the following strings: "warning", "error", "info"

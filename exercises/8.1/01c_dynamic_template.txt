@@ -1,0 +1,18 @@
+# ** EXAM OBJECTIVE: DATA MANAGEMENT **
+# GOAL: Define and use a dynamic template that satisfies a given set of requirements
+# REQUIRED SETUP: (i) a running Elasticsearch cluster with at least one node and a Kibana instance, (ii) no index named `hamlet`, (iii) no index or index template that starts by `hamlet`
+# You can copy-paste the following instructions into your Kibana console and work directly from there
+
+# Create the index template `hamlet_template`, so that the template (i) matches any index that starts by "hamlet_" or "hamlet-", (ii) allocates one primary shard and no replicas for each matching index
+# Update `hamlet_template` so as to (i) enable dynamic mapping, (ii) dynamically map to an integer any field that starts by "number_", (iii) dynamically map to unanalysed text any string field
+# Create the index `hamlet-2` and add a document by running the following command
+POST hamlet-2/_doc/4
+{
+  "text_entry": "With turbulent and dangerous lunacy?",
+  "line_number": "3.1.4",
+  "number_act": "3",
+  "speaker": "KING CLAUDIUS"
+}
+# Verify that the mapping of `hamlet-2` is consistent with what defined in `hamlet_template`
+# Delete all indices beginning with `hamlet`
+# Delete all index templates beginning with `hamlet`
